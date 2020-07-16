@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnGetLastLocation, btnReceiveUpdate, btnRemoveUpdate;
     FusedLocationProviderClient client;
-    LocationRequest mLocationRequest;
     LocationCallback mLocationCallback;
 
     @Override
@@ -86,7 +85,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnRemoveUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkPermission() == true) {
+                    client.removeLocationUpdates(mLocationCallback);
+                }
+            }
+        });
     }
+    
     private boolean checkPermission(){
         int permissionCheck_Coarse = ContextCompat.checkSelfPermission(
                 MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
